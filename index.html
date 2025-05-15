@@ -207,9 +207,24 @@
 
         function undoLastEntry() {
             const textarea = document.getElementById('results');
-            const lastDotIndex = textarea.value.lastIndexOf('.');
-            if (lastDotIndex !== -1) {
-                textarea.value = textarea.value.slice(0, lastDotIndex);
+            let currentText = textarea.value.trim();
+            
+            if (!currentText) return;
+            
+            // Find the last dot position
+            const lastDotPos = currentText.lastIndexOf('.');
+            
+            if (lastDotPos >= 0) {
+                // Find the previous dot or start if this is the first number
+                const prevPos = currentText.lastIndexOf('.', lastDotPos - 1);
+                
+                if (prevPos >= 0) {
+                    // Remove from the previous dot to end (keeps existing dots)
+                    textarea.value = currentText.substring(0, prevPos ? prevPos + 1 : 0);
+                } else {
+                    // Remove everything if this was the first number
+                    textarea.value = '';
+                }
             }
         }
     </script>
