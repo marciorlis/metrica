@@ -77,7 +77,7 @@
         }
         .clear-button {
             background-color: #f44336;
-            color: white;
+            color: #ff0000;
         }
     </style>
 </head>
@@ -85,9 +85,11 @@
     <div class="container">
         <h1>Contador de Sílabas Poéticas</h1>
         <div class="instructions">
-            Pressione a barra de espaço para contar sílabas. <br>Após 2 segundos de inatividade, o total é rapidamente registrado. <br>Repita tantas vezes forem necessárias para a contagem completa.
+            Pressione a barra de espaço para contar sílabas. <br>Após 2 segundos de inatividade, o total é rapidamente registrado.<br>Repita tantas vezes forem necessárias para a contagem completa.
         </div>
-        
+        <div class="instructions">
+            Use os botões para adicionar expressões comuns com um click.,
+        </div>
         <div class="counter" id="counter">0</div>
         <div class="button-container">
             <button onclick="addText('D')">D</button>
@@ -97,13 +99,11 @@
             <button onclick="addText(' ou CM')">CM</button>
             <button onclick="addText(' ou LM')">LM</button>
         </div>
-      <div class="instructions">
-            Use os botões para adicionar expressões comuns com um click.
-        </div>
         <textarea id="results" placeholder="Resultados aparecerão aqui..."></textarea>
         <div class="action-buttons">
             <button onclick="copyText()" class="action-button copy-button">Copiar texto</button>
-            <button onclick="clearText()" class="action-button clear-button">Limpar tudo</button>
+            <button onclick="undoLastEntry()" class="action-button" style="background-color: #FFC107;">Desfazer entrada</button>
+            <button onclick="clearText()" class="action-button" style="background-color: #f44336;">Limpar</button>
         </div>
     </div>
 
@@ -160,6 +160,14 @@
         function clearText() {
             const textarea = document.getElementById('results');
             textarea.value = '';
+        }
+
+        function undoLastEntry() {
+            const textarea = document.getElementById('results');
+            const lastDotIndex = textarea.value.lastIndexOf('.');
+            if (lastDotIndex !== -1) {
+                textarea.value = textarea.value.slice(0, lastDotIndex);
+            }
         }
     </script>
 </body>
