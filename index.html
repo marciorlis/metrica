@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -84,8 +85,9 @@
     <div class="container">
         <h1>Contador de Sílabas Poéticas</h1>
         <div class="instructions">
-            Pressione a barra de espaço para contar sílabas. Após 3 segundos de inatividade, o total é registrado.
+            Pressione a barra de espaço para contar sílabas. Após 2 segundos de inatividade, o total é rapidamente registrado.
         </div>
+        
         <div class="counter" id="counter">0</div>
         <div class="button-container">
             <button onclick="addText('D')">D</button>
@@ -95,7 +97,10 @@
             <button onclick="addText(' ou CM')">CM</button>
             <button onclick="addText(' ou LM')">LM</button>
         </div>
-        <textarea id="results" placeholder="Resultados aparecerão aqui..." readonly></textarea>
+      <div class="instructions">
+            Use os botões para adicionar expressões comuns com um click.
+        </div>
+        <textarea id="results" placeholder="Resultados aparecerão aqui..."></textarea>
         <div class="action-buttons">
             <button onclick="copyText()" class="action-button copy-button">Copiar texto</button>
             <button onclick="clearText()" class="action-button clear-button">Limpar tudo</button>
@@ -104,8 +109,8 @@
 
     <script>
         let counter = 0;
-        let timeoutId = null;
-        const timeoutDuration = 3000; // 3 segundos
+        let toutId = null;
+        const timeoutDuration = 2000; // 2 segundos
         const counterElement = document.getElementById('counter');
         const resultsTextarea = document.getElementById('results');
 
@@ -116,8 +121,8 @@
                 counterElement.textContent = counter;
                 
                 // Reinicia o timeout
-                if (timeoutId) clearTimeout(timeoutId);
-                timeoutId = setTimeout(recordCount, timeoutDuration);
+                if (toutId) clearTimeout(toutId);
+                toutId = setTimeout(recordCount, timeoutDuration);
             }
         });
 
@@ -126,7 +131,7 @@
                 // Adiciona o contador atual à textarea
                 const currentText = resultsTextarea.value;
                 resultsTextarea.value = currentText ? 
-                    `${currentText} ${counter}.` : 
+                    `${currentText + counter + '.'}` : 
                     `${counter}.`;
                 
                 // Reseta o contador
