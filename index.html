@@ -87,23 +87,66 @@
         <div class="instructions">
             Pressione a barra de espaço para contar sílabas. <br>Após 2 segundos de inatividade, o total é rapidamente registrado.<br>Repita tantas vezes forem necessárias para a contagem completa.
         </div>
-        <div class="instructions">
-            Use os botões para adicionar expressões comuns com um click.,
-        </div>
+        
         <div class="counter" id="counter">0</div>
         <div class="button-container">
-            <button onclick="addText('D')">D</button>
-            <button onclick="addText(' com refrão')">+ refrão</button>
-            <button onclick="addText(' com estribilho')"> estribilho</button>
-            <button onclick="addText(' ou SMD')">SMD</button>
+            
+            
+            <button onclick="addText(' ou SM')">SM</button>
             <button onclick="addText(' ou CM')">CM</button>
             <button onclick="addText(' ou LM')">LM</button>
+          <button onclick="addText('D')">D</button>
+          <button onclick="addText(' com refrão')">+ refrão</button>
+            <button onclick="addText(' com estribilho')"> + estribilho</button>
+        </div>
+      <div class="instructions">
+            Use os botões para adicionar expressões comuns com um click.,
         </div>
         <textarea id="results" placeholder="Resultados aparecerão aqui..."></textarea>
         <div class="action-buttons">
             <button onclick="copyText()" class="action-button copy-button">Copiar texto</button>
             <button onclick="undoLastEntry()" class="action-button" style="background-color: #FFC107;">Desfazer entrada</button>
             <button onclick="clearText()" class="action-button" style="background-color: #f44336;">Limpar</button>
+        </div>
+        <div class="instructions" style="text-align: left; margin-top: 30px;">
+            <h3>Informações sobre Métricas</h3>
+            <table style="border-collapse: collapse; width: 100%">
+                <tr>
+                    <th>Abreviação</th>
+                    <th>Nome Completo</th>
+                    <th>Estrutura Métrica</th>
+                </tr>
+                <tr>
+                    <td>SM</td>
+                    <td>Short Meter</td>
+                    <td>6.6.8.6</td>
+                </tr>
+                <tr>
+                    <td>CM</td>
+                    <td>Common Meter</td>
+                    <td>8.6.8.6</td>
+                </tr>
+                <tr>
+                    <td>LM</td>
+                    <td>Long Meter</td>
+                    <td>8.8.8.8</td>
+                </tr>
+                <tr>
+                    <td>SMD</td>
+                    <td>Short Meter Double</td>
+                    <td>6.6.8.6.6.6.8.6</td>
+                </tr>
+                <tr>
+                    <td>CMD</td>
+                    <td>Common Meter Double</td>
+                    <td>8.6.8.6.8.6.8.6</td>
+                </tr>
+                <tr>
+                    <td>LMD</td>
+                    <td>xLong Meter Double</td>
+                    <td>8.8.8.8.8.8.8.8</td>
+                </tr>
+            </table>
         </div>
     </div>
 
