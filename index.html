@@ -1,0 +1,161 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Sílabas Poéticas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .counter {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #333;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 12px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #d0d0d0;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .instructions {
+            margin: 20px 0;
+            color: #666;
+        }
+        .action-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .action-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .action-button:hover {
+            opacity: 0.9;
+        }
+        .copy-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .clear-button {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contador de Sílabas Poéticas</h1>
+        <div class="instructions">
+            Pressione a barra de espaço para contar sílabas. Após 3 segundos de inatividade, o total é registrado.
+        </div>
+        <div class="counter" id="counter">0</div>
+        <div class="button-container">
+            <button onclick="addText('D')">D</button>
+            <button onclick="addText(' com refrão')">+ refrão</button>
+            <button onclick="addText(' com estribilho')"> estribilho</button>
+            <button onclick="addText(' ou SMD')">SMD</button>
+            <button onclick="addText(' ou CM')">CM</button>
+            <button onclick="addText(' ou LM')">LM</button>
+        </div>
+        <textarea id="results" placeholder="Resultados aparecerão aqui..." readonly></textarea>
+        <div class="action-buttons">
+            <button onclick="copyText()" class="action-button copy-button">Copiar texto</button>
+            <button onclick="clearText()" class="action-button clear-button">Limpar tudo</button>
+        </div>
+    </div>
+
+    <script>
+        let counter = 0;
+        let timeoutId = null;
+        const timeoutDuration = 3000; // 3 segundos
+        const counterElement = document.getElementById('counter');
+        const resultsTextarea = document.getElementById('results');
+
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                event.preventDefault(); // Evita que a barra de espaço role a página
+                counter++;
+                counterElement.textContent = counter;
+                
+                // Reinicia o timeout
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = setTimeout(recordCount, timeoutDuration);
+            }
+        });
+
+        function recordCount() {
+            if (counter > 0) {
+                // Adiciona o contador atual à textarea
+                const currentText = resultsTextarea.value;
+                resultsTextarea.value = currentText ? 
+                    `${currentText} ${counter}.` : 
+                    `${counter}.`;
+                
+                // Reseta o contador
+                counter = 0;
+                counterElement.textContent = counter;
+            }
+        }
+
+        function addText(text) {
+            const textarea = document.getElementById('results');
+            if (textarea) {
+                if (textarea.value === '') {
+                    textarea.value = text;
+                } else {
+                    textarea.value += " " + text;
+                }
+            }
+        }
+
+        function copyText() {
+            const textarea = document.getElementById('results');
+            textarea.select();
+            document.execCommand('copy');
+        }
+
+        function clearText() {
+            const textarea = document.getElementById('results');
+            textarea.value = '';
+        }
+    </script>
+</body>
+</html>
